@@ -51,8 +51,11 @@
         // Handle click on the canvas
         canvas.addEventListener("click", (event) => {
           const rect = canvas.getBoundingClientRect();
-          const mouseX = event.clientX - rect.left;
-          const mouseY = event.clientY - rect.top;
+          const scaleX = canvas.width / rect.width;
+          const scaleY = canvas.height / rect.height;
+
+          const mouseX = (event.clientX - rect.left) * scaleX;
+          const mouseY = (event.clientY - rect.top) * scaleY;
 
           // Check if the click is on any player
           for (const player of players) {
