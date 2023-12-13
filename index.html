@@ -47,6 +47,23 @@
 
         // Start the game
         updateAndDraw();
+
+        // Handle click on the canvas
+        canvas.addEventListener("click", (event) => {
+          const rect = canvas.getBoundingClientRect();
+          const mouseX = event.clientX - rect.left;
+          const mouseY = event.clientY - rect.top;
+
+          // Check if the click is on any player
+          for (const player of players) {
+            const distance = Math.sqrt(
+              (mouseX - player.x) ** 2 + (mouseY - player.y) ** 2
+            );
+            if (distance <= 15) {
+              movePlayerToRandomSpot(player, canvas);
+            }
+          }
+        });
       });
     </script>
   </body>
